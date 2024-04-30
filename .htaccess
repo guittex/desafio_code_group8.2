@@ -1,4 +1,5 @@
-RewriteEngine on
-RewriteRule !\.(gif|png|jpg|css|js|txt|mp4|map|html|svg|json)$ index.php
-#RewriteRule .* index.php
-php_flag short_open_tag on 
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteCond %{REQUEST_URI} !^public
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
