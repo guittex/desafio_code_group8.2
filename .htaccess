@@ -1,7 +1,8 @@
 <IfModule mod_rewrite.c>
-    RewriteEngine on
+    <!-- RewriteEngine on
     RewriteCond %{REQUEST_URI} !^public
     RewriteRule ^(.*)$ public/$1 [L]
     Order allow,deny
-    Deny from all
+    Deny from all -->
+    Allow from all
 </IfModule>
