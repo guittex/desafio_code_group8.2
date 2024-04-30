@@ -1,8 +1,17 @@
-<IfModule mod_rewrite.c>
+<!-- <IfModule mod_rewrite.c> -->
     <!-- RewriteEngine on
     RewriteCond %{REQUEST_URI} !^public
     RewriteRule ^(.*)$ public/$1 [L]
     Order allow,deny
     Deny from all -->
-    Allow from all
-</IfModule>
+    <!-- Allow from all -->
+<!-- </IfModule> -->
+
+<If "%{REQUEST_URI} =~ m#^/vendor/#">
+    Require all denied
+ </If>
+ 
+ # all access to /vendor/*.scss
+ <If "%{REQUEST_URI} =~ m#^/vendor/.+\.scss$#">
+    Require all granted
+ </If>
