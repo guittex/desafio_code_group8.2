@@ -13,7 +13,7 @@ Route::get('/', function(){
 });
 
 Route::get('/jogadores', [JogadoresController::class, 'index']);
-
+ 
 
 
 Route::controller(JogadoresController::class)->group(function () {
