@@ -26,7 +26,7 @@
     @if(!config('adminlte.enabled_laravel_mix'))
         <link rel="stylesheet" href="{{ asset('v/fontawesome-free/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('v/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-        <link rel="stylesheet" href="https://desafio-code-group-2-e2f6633e7e51.herokuapp.com/css_admin.css">
+        <link rel="stylesheet" href="{{ asset('css_admin.css') }}">
 
         @if(config('adminlte.google_fonts.allowed', true))
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
