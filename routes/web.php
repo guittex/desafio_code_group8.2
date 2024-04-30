@@ -15,7 +15,6 @@ Route::get('/', function(){
 Route::get('/jogadores', [JogadoresController::class, 'index']);
  
 
-
 Route::controller(JogadoresController::class)->group(function () {
     // Route::get('/jogadores', 'index');
     Route::post('jogadores/createUpdate', 'createUpdate')->name("jogadores.add-edit");
