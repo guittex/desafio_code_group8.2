@@ -1,49 +1,5 @@
-I deployed a PHP application and when I hit the url, I get the following error:
-
-Forbidden
-
-You don't have permission to access / on this server.
-I guess it tries to go into the app/ directory but it can't.
-
-My project structure:
-
-my-project
-|
-|-> app/
-|-> public/ (index.php inside here that takes care of routing)
-Procfile
-composer.json
-etc.
-What the log shows:
-
-Jul 24 12:44:08 cryptic-beyond-39147 app/web.1:  [Sun Jul 24 19:44:07.846582 2016] [autoindex:error] [pid 99:tid 139960748263168] [client 10.179.164.130:28253] AH01276: Cannot serve directory /app/: No matching DirectoryIndex (index.php,index.html,index.htm) found, and server-generated directory index forbidden by Options directive 
-Jul 24 12:44:08 cryptic-beyond-39147 app/web.1:  10.179.164.130 - - [24/Jul/2016:19:44:07 +0000] "GET / HTTP/1.1" 403 209 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.63 Safari/537.36 
-Jul 24 12:44:13 cryptic-beyond-39147 heroku/router:  at=info method=GET path="/" host=cryptic-beyond-39147.herokuapp.com request_id=9b5e81de-440b-4001-90a4-bc94ee891d3c fwd="89.210.178.134" dyno=web.1 connect=0ms service=1ms status=403 bytes=373 
-Procfile
-
-web: vendor/bin/heroku-php-apache2 public/
-.htaccess
-
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
+    RewriteEngine on
+    RewriteCond %{REQUEST_URI} !^public
+    RewriteRule ^(.*)$ public/$1 [L]
     </IfModule>
-
-    RewriteEngine On
-
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
-
-    # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
-
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-
-    AddType 'text/css; charset=UTF-8' css
-
-</IfModule>
